@@ -46,6 +46,10 @@ function register_post_type_event()
             'registrations' => ['title' => 'Registrations', 'sortable' => false, 'function' => function () {
                 global $post;
                 global $wpdb;
+
+                //Gray-add id pour le post actuel
+                $post_id = $post->ID;
+
                 $sql_query = $wpdb->prepare("SELECT COUNT(`post_id`) as count FROM %i WHERE `meta_key` = 'registration_event_id' AND `meta_value` = %d", $wpdb->postmeta, $post_id);
                 $result = $wpdb->get_row($sql_query, ARRAY_A);
                 echo $result['count'];
